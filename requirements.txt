@@ -1,0 +1,6 @@
+speechrecognition
+gtts
+deepl
+numpy
+wavio
+sounddevice
