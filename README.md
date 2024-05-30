@@ -14,7 +14,7 @@ This Python project provides functionality for real-time speech-to-speech transl
 1. Clone the repository to your local machine:
 
     ```bash
-    git clone https://github.com/yourusername/speech-to-speech-translation.git
+    git clone https://github.com/bykemalh/S2ST.git
     ```
 
 2. Install the required Python packages using pip:
