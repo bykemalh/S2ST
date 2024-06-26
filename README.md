@@ -1,66 +1,132 @@
-# Speech to Speech Translation
+# Speech-to-Speech Translator
 
-This Python project provides functionality for real-time speech-to-speech translation using two different methods. It utilizes speech recognition, translation, and text-to-speech libraries to enable translation between different languages.
+This project uses Google Cloud Speech-to-Text API to transcribe speech to text, DeepL API to translate the transcribed text, and ElevenLabs API to convert the translated text back to speech. This creates a seamless speech-to-speech translation system.
 
-## Features
+## Prerequisites
 
-- **Two Translation Methods:** Two different approaches for speech translation are implemented.
-- **Real-time Translation:** The application translates speech input into the desired target language in real-time.
-- **User Interaction:** User-friendly interface with instructions for interaction.
-- **Flexibility:** Easily change target languages and adjust settings according to user requirements.
+Before running this project, ensure you have the following dependencies installed:
+
+- Python 3.7 or later
+- Google Cloud SDK (gcloud)
+- Pyaudio
+- Requests
+- Pygame
+- DeepL API key
+- ElevenLabs API key
 
 ## Installation
 
-1. Clone the repository to your local machine:
-
-    ```bash
+1. **Clone the repository:**
+    ```sh
     git clone https://github.com/bykemalh/S2ST.git
+    cd S2ST
     ```
 
-2. Install the required Python packages using pip:
-
-    ```bash
-    pip install -r requirements.txt
+2. **Set up a virtual environment:**
+    ```sh
+    python3 -m venv env
+    source env/bin/activate  # On Windows use `env\Scripts\activate`
     ```
 
-3. Ensure you have valid API keys for the translation services used in the code.
-
-## Usage
-
-1. Run the script `speech_translation.py` using Python:
-
-    ```bash
-    python speech_translation.py
+3. **Install the required Python packages:**
+    ```sh
+    pip install google-cloud-speech pyaudio deepl requests pygame
     ```
 
-2. Follow the on-screen instructions to interact with the application:
-   - Press any key to initiate speech recognition.
-   - Speak into the microphone.
-   - Wait for the translation and listen to the output.
-   - Say "exit" to quit the application.
+4. **Install Google Cloud SDK:**
+    Follow the installation instructions for your operating system [here](https://cloud.google.com/sdk/docs/install).
 
-## Method 1: Using ElevenLabs and DeepL APIs
+5. **Authenticate with Google Cloud:**
+    ```sh
+    gcloud auth login
+    gcloud auth application-default login
+    ```
 
-This method utilizes ElevenLabs API for text-to-speech conversion and DeepL API for translation. The translated text is then vocalized using the text-to-speech service.
+6. **Enable the Google Cloud Speech-to-Text API:**
+    ```sh
+    gcloud services enable speech.googleapis.com
+    ```
 
-### Requirements
+7. **Set up API keys:**
+    Replace the placeholder values in the script with your actual DeepL and ElevenLabs API keys.
+    ```python
+    auth_key = "your-deepl-auth-key"
+    xi_api_key = "your-elevenlabs-api-key"
+    ```
 
-- [ElevenLabs API Key]([https://www.eleven-labs.com/en/products/text-to-speech])
-- [DeepL API Key](https://www.deepl.com/pro)
+## Running the Application
 
-## Method 2: Using gTTS and Google Speech Recognition
+To run the application, simply execute the `main.py` script:
 
-This method employs Google Text-to-Speech (gTTS) for text-to-speech conversion and Google Speech Recognition for speech-to-text conversion. The translated text is then vocalized using gTTS.
+```sh
+python S2ST_NewAdvanced.py
+```
 
-### Requirements
+## How It Works
 
-- [Google Text-to-Speech (gTTS)](https://pypi.org/project/gTTS/)
-- [Google Speech Recognition](https://pypi.org/project/SpeechRecognition/)
+1. **Audio Input:**
+    - The application opens a microphone stream using the `pyaudio` library and captures audio in real-time.
+
+2. **Speech-to-Text:**
+    - The captured audio is sent to the Google Cloud Speech-to-Text API, which returns the transcribed text.
+
+3. **Translation:**
+    - The transcribed text is translated to English using the DeepL API.
+
+4. **Text-to-Speech:**
+    - The translated text is sent to the ElevenLabs API, which converts it to speech and plays it back.
+
+## Dependencies
+
+Ensure you have the following libraries installed:
+
+- `google-cloud-speech`
+- `pyaudio`
+- `deepl`
+- `requests`
+- `pygame`
+
+You can install these dependencies using the following command:
+
+```sh
+pip install google-cloud-speech pyaudio deepl requests pygame
+```
+
+## Configuration
+
+Modify the following variables in the script to match your settings:
+
+- `auth_key`: Your DeepL API key.
+- `xi_api_key`: Your ElevenLabs API key.
+- `voice_id`: The voice ID to be used with ElevenLabs API.
+- `RATE`: The audio sample rate (default is 16000).
+- `CHUNK`: The audio chunk size (default is 1600).
+
+## Logging
+
+Logging is set up in the script to capture errors during the text-to-speech conversion process. You can enable more detailed logging by uncommenting the logging configuration line.
+
+```python
+# logging.basicConfig(level=logging.DEBUG)
+```
 
 ## License
 
-This project is licensed under the GNU General Public License v3.0 (GPL-3.0). See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## Credits
+## Contributing
 
-- **Author:** [Your Name](https://github.com/bykemalh)
+If you wish to contribute to this project, please fork the repository and create a pull request.
+
+## Acknowledgments
+
+- [Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text/docs)
+- [DeepL API](https://www.deepl.com/docs-api)
+- [ElevenLabs API](https://www.elevenlabs.io/docs/api)
+
+
+<hr>
+
+### Developed By
+
+This algorithm was developed by Kemal Hafızoğlu.
